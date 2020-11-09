@@ -16,7 +16,7 @@ Auditlog(client, {
     auditmsg: "info",
   },
 });
-
+console.log("GITHUBI MUUDATUS");
 client.on("ready", async () => {
   await wait(1000);
 
