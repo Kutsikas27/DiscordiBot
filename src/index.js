@@ -16,7 +16,7 @@ Auditlog(client, {
     auditmsg: "info",
   },
 });
-console.log("GITHUBI MUUDATUS");
+
 client.on("ready", async () => {
   await wait(1000);
 
@@ -47,28 +47,29 @@ client.on("guildMemberAdd", (member) => {
 });
 
 client.on("message", (msg) => {
-  if (msg.author.bot) return;
-  if (msg.channel.id !== "769670695424622626") return;
-  if (
-    msg.content === "pilt, kiisukas" &&
-    msg.author.id === "378303769835995156"
-  ) {
-    const pildiNumber = Math.floor(Math.random() * filenames.length);
+  const { author, channel, content } = msg;
+  if (author.bot) return;
+  if (channel.id !== "769709626357841973") return;
+  if (content === "pilt, kiisukas") {
+    if (author.id === "378303769835995156") {
+      return handleSendSexyImage(msg);
+    } else {
+      return handleKutsikasOnlyMessage();
+    }
+  }
+});
 
-    msg.channel.send({ files: ["./pildid/" + filenames[pildiNumber]] });
-    //client.emit("guildMemberAdd", msg.user);
-  }
-});
-client.on("message", (msg) => {
-  if (msg.author.bot) return;
-  if (msg.channel.id !== "769670695424622626") return;
-  if (
-    msg.content === "pilt, kiisukas" &&
-    msg.author.id !== "378303769835995156"
-  ) {
-    msg.channel.send("Ma teenin ainult isand Kutsikat!");
-    //client.emit("guildMemberAdd", msg.user);
-  }
-});
+const handleSendSexyImage = (msg) => {
+  const pildiNumber = Math.floor(Math.random() * filenames.length);
+  msg.channel.send({ files: ["./pildid/" + filenames[pildiNumber]] });
+};
+
+const handleKutsikasOnlyMessage = (msg) => {
+  msg.channel.send("Ma teenin ainult isand Kutsikat!");
+};
+
+const handleSomethingElse = (msg) => {
+  msg.channel.send("test töötab!");
+};
 
 client.login(process.env.BOT_TOKEN);
