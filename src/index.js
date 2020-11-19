@@ -4,11 +4,13 @@ require("dotenv").config();
 const fs = require("fs");
 const time = require("./aeg.js");
 const client = new Discord.Client();
-const channelId = "772846887472201738";
+const infoChannelId = "772846887472201738";
+const devChannelId = "769709626357841973";
 const invites = {};
 const wait = require("util").promisify(setTimeout);
 const filenames = fs.readdirSync("./pildid");
 const Auditlog = require("discord-auditlog");
+
 Auditlog(client, {
   "769670695424622623": {
     auditlog: "info",
@@ -39,7 +41,7 @@ client.on("guildMemberAdd", (member) => {
     const inviter = client.users.cache.get(invite.inviter.id);
 
     client.channels.cache
-      .get(channelId)
+      .get(infoChannelId)
       .send(
         `**${member.user.tag}** liitus koodiga ${invite.code} kasutajalt **${inviter.tag}**. Koodi kasutati ${invite.uses} korda loomisest alates.`
       );
@@ -56,8 +58,8 @@ client.on("message", (msg) => {
       return handleKutsikasOnlyMessage();
     }
   }
-  if (content === "uptime") {
-    if (channel.id === "769709626357841973") {
+  if (content === "?uptime") {
+    if (channel.id === devChannelId) {
       return botUpTime(msg);
     }
   }
@@ -73,7 +75,7 @@ const handleKutsikasOnlyMessage = (msg) => {
 };
 
 const botUpTime = (msg) => {
-  msg.channel.send(time);
+  msg.channel.send(time(client.uptime / 1000));
 };
 
 client.login(process.env.BOT_TOKEN);
