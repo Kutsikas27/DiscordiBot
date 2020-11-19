@@ -49,12 +49,16 @@ client.on("guildMemberAdd", (member) => {
 client.on("message", (msg) => {
   const { author, channel, content } = msg;
   if (author.bot) return;
-  if (channel.id !== "769709626357841973") return;
   if (content === "pilt, kiisukas") {
     if (author.id === "378303769835995156") {
       return handleSendSexyImage(msg);
     } else {
       return handleKutsikasOnlyMessage();
+    }
+  }
+  if (content === "uptime") {
+    if (channel.id === "769709626357841973") {
+      return botUpTime(msg);
     }
   }
 });
@@ -68,8 +72,8 @@ const handleKutsikasOnlyMessage = (msg) => {
   msg.channel.send("Ma teenin ainult isand Kutsikat!");
 };
 
-const handleSomethingElse = (msg) => {
-  msg.channel.send("test töötab!");
+const botUpTime = (msg) => {
+  msg.channel.send(time);
 };
 
 client.login(process.env.BOT_TOKEN);
