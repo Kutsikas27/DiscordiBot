@@ -48,7 +48,7 @@ module.exports = function prettySeconds(seconds) {
     for (i = 0; i < length; i++) {
       if (prettyString.length > 0) {
         if (i === length - 1) {
-          prettyString += " and ";
+          prettyString += " ja ";
         } else {
           prettyString += ", ";
         }
