@@ -5,7 +5,7 @@ const fs = require("fs");
 const time = require("./aeg.js");
 const client = new Discord.Client();
 const infoChannelId = "772846887472201738";
-const devChannelId = "769709626357841973";
+const testChannelId = "768209775741501460";
 const invites = {};
 const wait = require("util").promisify(setTimeout);
 const filenames = fs.readdirSync("./pildid");
@@ -20,6 +20,7 @@ Auditlog(client, {
 });
 
 client.on("ready", async () => {
+  client.user.setActivity('"Sopranos"', { type: "WATCHING" });
   await wait(1000);
 
   client.guilds.cache.forEach((g) => {
@@ -59,7 +60,7 @@ client.on("message", (msg) => {
     }
   }
   if (content === "?uptime") {
-    if (channel.id === devChannelId) {
+    if (channel.id === testChannelId) {
       return botUpTime(msg);
     }
   }
