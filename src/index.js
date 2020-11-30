@@ -65,8 +65,8 @@ client.on("message", (msg) => {
   }
 
   if (
-    (author.id === authorKutsikas && content.includes("onju?")) ||
-    (author.id === authorKutsikas && content.includes("eksju?"))
+    (author.id === authorKutsikas && content.includes("onju")) ||
+    (author.id === authorKutsikas && content.includes("eksju"))
   ) {
     return reactMessage(msg);
   }
