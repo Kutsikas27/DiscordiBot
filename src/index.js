@@ -60,10 +60,8 @@ client.on("message", (msg) => {
     }
   }
   if (content === "?uptime") {
-    {
-      return botUpTime(msg);
-    }
-  
+    return botUpTime(msg);
+  }
   if (content.includes("onju?") || content.includes("eksju?")) {
     return reactMessage(msg);
   }
@@ -84,7 +82,6 @@ const botUpTime = (msg) => {
 const reactMessage = (msg) => {
   msg.react("👍");
   msg.react("💋");
-  
 };
 
 client.login(process.env.BOT_TOKEN);
