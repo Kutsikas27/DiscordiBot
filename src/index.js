@@ -60,10 +60,10 @@ client.on("message", (msg) => {
     }
   }
   if (content === "?uptime") {
-    if (channel.id === testServerId) {
+    {
       return botUpTime(msg);
     }
-  }
+  
   if (content.includes("onju?") || content.includes("eksju?")) {
     return reactMessage(msg);
   }
