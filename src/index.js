@@ -5,7 +5,7 @@ const fs = require("fs");
 const time = require("./aeg.js");
 const client = new Discord.Client();
 const infoChannelId = "772846887472201738";
-const testChannelId = "768209775741501460";
+const testServerId = "768209775741501460";
 const invites = {};
 const wait = require("util").promisify(setTimeout);
 const filenames = fs.readdirSync("./pildid");
@@ -60,7 +60,7 @@ client.on("message", (msg) => {
     }
   }
   if (content === "?uptime") {
-    if (channel.id === testChannelId) {
+    if (channel.id === testServerId) {
       return botUpTime(msg);
     }
   }
