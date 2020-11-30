@@ -64,6 +64,9 @@ client.on("message", (msg) => {
       return botUpTime(msg);
     }
   }
+  if (content.includes("onju?") || content.includes("eksju?")) {
+    return reactMessage(msg);
+  }
 });
 
 const handleSendSexyImage = (msg) => {
@@ -77,6 +80,11 @@ const handleKutsikasOnlyMessage = (msg) => {
 
 const botUpTime = (msg) => {
   msg.channel.send(time(client.uptime / 1000));
+};
+const reactMessage = (msg) => {
+  msg.react("👍");
+  msg.react("💋");
+  
 };
 
 client.login(process.env.BOT_TOKEN);
