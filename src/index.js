@@ -51,18 +51,23 @@ client.on("guildMemberAdd", (member) => {
 
 client.on("message", (msg) => {
   const { author, channel, content } = msg;
+  const authorKutsikas = "378303769835995156";
   if (author.bot) return;
   if (content === "?pilt") {
-    if (author.id === "378303769835995156") {
+    if (author.id === authorKutsikas) {
       return handleSendSexyImage(msg);
     } else {
       return handleKutsikasOnlyMessage(msg);
     }
   }
-  if (content === "?uptime") {
+  if (content === "?uptime" && author.id === authorKutsikas) {
     return botUpTime(msg);
   }
-  if (content.includes("onju?") || content.includes("eksju?")) {
+
+  if (
+    (author.id === authorKutsikas && content.includes("onju?")) ||
+    content.includes("eksju?")
+  ) {
     return reactMessage(msg);
   }
 });
