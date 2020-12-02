@@ -3,11 +3,9 @@ const Discord = require("discord.js");
 require("dotenv").config();
 const fs = require("fs");
 const time = require("./aeg.js");
+const invites = require("./invite");
+const status = require("./status");
 const client = new Discord.Client();
-const infoChannelId = "772846887472201738";
-const testServerId = "768209775741501460";
-const invites = {};
-const wait = require("util").promisify(setTimeout);
 const filenames = fs.readdirSync("./pildid");
 const Auditlog = require("discord-auditlog");
 
@@ -19,34 +17,9 @@ Auditlog(client, {
   },
 });
 
-client.on("ready", async () => {
-  client.user.setActivity('"Sopranos"', { type: "WATCHING" });
-  await wait(1000);
-
-  client.guilds.cache.forEach((g) => {
-    g.fetchInvites().then((guildInvites) => {
-      invites[g.id] = guildInvites;
-    });
-  });
-});
-client.on("guildMemberAdd", (member) => {
-  member.guild.fetchInvites().then((guildInvites) => {
-    const ei = invites[member.guild.id];
-
-    invites[member.guild.id] = guildInvites;
-
-    const invite = guildInvites.find(
-      (i) => ei.get(i.code) && ei.get(i.code).uses < i.uses
-    );
-
-    const inviter = client.users.cache.get(invite.inviter.id);
-
-    client.channels.cache
-      .get(infoChannelId)
-      .send(
-        `**${member.user.tag}** liitus koodiga ${invite.code} kasutajalt **${inviter.tag}**. Koodi kasutati ${invite.uses} korda loomisest alates.`
-      );
-  });
+client.on("ready", () => {
+  invites(client);
+  status(client);
 });
 
 client.on("message", (msg) => {
@@ -70,6 +43,7 @@ client.on("message", (msg) => {
   ) {
     return reactMessage(msg);
   }
+  
 });
 
 const handleSendSexyImage = (msg) => {
