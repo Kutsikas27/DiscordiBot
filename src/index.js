@@ -83,6 +83,8 @@ const handleKutsikasOnlyMessage = (msg) => {
 
 const botUpTime = (msg) => {
   msg.channel.send(time(client.uptime / 1000));
+
+  
 };
 const reactMessage = (msg) => {
   msg.react("👍");
