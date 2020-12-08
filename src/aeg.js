@@ -15,8 +15,8 @@ function fix10(number) {
 }
 
 module.exports = function prettySeconds(seconds) {
-  var prettyString = "";
-  var data = [];
+  let prettyString = "";
+  let data = [];
 
   if (typeof seconds === "number") {
     data = quantify(data, "päev", parseInt(fix10(seconds / 86400)), false, "a");
