@@ -21,14 +21,9 @@ module.exports = function (msg) {
     msg.react("💋");
   };
   if (author.bot) return;
-  if (content === "?pilt") {
-    if (author.id === authorKutsikas) {
-      return handleSendSexyImage(msg);
-    } else {
-      return handleKutsikasOnlyMessage(msg);
-    }
-  }
-  if (content === "?uptime" && author.id === authorKutsikas) {
+  if (content === "!pilt") return handleSendSexyImage(msg);
+
+  if (content === "!uptime" && author.id === authorKutsikas) {
     return botUpTime(msg);
   }
 
