@@ -8,6 +8,7 @@ module.exports = function (msg) {
     const pildiNumber = Math.floor(Math.random() * filenames.length);
     msg.channel.send({ files: ["./pildid/" + filenames[pildiNumber]] });
   };
+  console.log(msg);
 
   const handleKutsikasOnlyMessage = (msg) => {
     msg.channel.send("Ma teenin ainult isand Kutsikat!");
@@ -20,6 +21,16 @@ module.exports = function (msg) {
     msg.react("👍");
     msg.react("💋");
   };
+  const reactAvatar = (msg) => {
+    msg.channel.send(
+      msg.author.displayAvatarURL({
+        format: "png",
+        dynamic: true,
+        size: 1024,
+      })
+    );
+  };
+
   if (author.bot) return;
   if (content === "!pilt") return handleSendSexyImage(msg);
 
@@ -33,4 +44,6 @@ module.exports = function (msg) {
   ) {
     return reactMessage(msg);
   }
+  
+  if (content === "!avatar") return reactAvatar(msg);
 };
