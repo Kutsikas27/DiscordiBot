@@ -22,8 +22,11 @@ module.exports = function (msg) {
     msg.react("💋");
   };
   const reactAvatar = (msg) => {
+    let user = msg.mentions.users.first();
+    if (!user) user = msg.author;
+
     msg.channel.send(
-      msg.author.displayAvatarURL({
+      user.displayAvatarURL({
         format: "png",
         dynamic: true,
         size: 1024,
@@ -44,6 +47,6 @@ module.exports = function (msg) {
   ) {
     return reactMessage(msg);
   }
-  
-  if (content === "!avatar") return reactAvatar(msg);
+
+  if (msg.content.includes("!avatar")) return reactAvatar(msg);
 };
