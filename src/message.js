@@ -1,6 +1,7 @@
 const fs = require("fs");
 const filenames = fs.readdirSync("./pildid");
 const time = require("./aeg.js");
+const Discord = require("discord.js");
 module.exports = function (msg) {
   const { author, channel, content } = msg;
   const authorKutsikas = "378303769835995156";
@@ -8,7 +9,7 @@ module.exports = function (msg) {
     const pildiNumber = Math.floor(Math.random() * filenames.length);
     msg.channel.send({ files: ["./pildid/" + filenames[pildiNumber]] });
   };
-  console.log(msg);
+  console.log(msg.author.username + ": " + msg.content);
 
   const handleKutsikasOnlyMessage = (msg) => {
     msg.channel.send("Ma teenin ainult isand Kutsikat!");
@@ -20,6 +21,18 @@ module.exports = function (msg) {
   const reactMessage = (msg) => {
     msg.react("👍");
     msg.react("💋");
+  };
+  const bankLink = (msg) => {
+    msg.channel.send("Swedbank: EGERT TÕNSTRÖM EE492200221060238691");
+  };
+  const supportersList = (msg) => {
+    const exampleEmbed = new Discord.MessageEmbed()
+      .setColor("#0099ff")
+      .setTitle("Suurimad annetajad:")
+      .addField("Test", "5€", true)
+      .setFooter("Swedbank: EGERT TÕNSTRÖM EE492200221060238691");
+
+    channel.send(exampleEmbed);
   };
   const reactAvatar = (msg) => {
     let user = msg.mentions.users.first();
@@ -49,4 +62,6 @@ module.exports = function (msg) {
   }
 
   if (msg.content.includes("!avatar")) return reactAvatar(msg);
+  if (msg.content == "!toeta") return bankLink(msg);
+  if (msg.content == "!top") return supportersList(msg);
 };
