@@ -29,7 +29,7 @@ module.exports = function (msg) {
     const exampleEmbed = new Discord.MessageEmbed()
       .setColor("#0099ff")
       .setTitle("💋TOP 10:💋")
-      .addField("`1:` Marta", "**115€**", true)
+      .addField("`1.` Marta **130€**")
       .setFooter("Swedbank: EGERT TÕNSTRÖM EE492200221060238691");
 
     channel.send(exampleEmbed);
