@@ -26,13 +26,13 @@ module.exports = function (msg) {
     msg.channel.send("Swedbank: EGERT TÕNSTRÖM EE492200221060238691");
   };
   const supportersList = (msg) => {
-    const exampleEmbed = new Discord.MessageEmbed()
-      .setColor("#0099ff")
+    const topEmbed = new Discord.MessageEmbed()
+      .setColor("#9035DF")
       .setTitle("💋TOP 10:💋")
-      .addField("`1.` Marta **130€**")
+      .setDescription("`1.` Marta **130€**")
       .setFooter("Swedbank: EGERT TÕNSTRÖM EE492200221060238691");
 
-    channel.send(exampleEmbed);
+    channel.send(topEmbed);
   };
   const reactAvatar = (msg) => {
     let user = msg.mentions.users.first();
